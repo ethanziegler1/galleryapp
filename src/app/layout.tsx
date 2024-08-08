@@ -1,7 +1,8 @@
 import "~/styles/globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import TopNav from "~/_components/topnav";
 
 export const metadata: Metadata = {
   title: "Gallery App",
@@ -9,24 +10,17 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-function TopNav() {
-  return (
-    <nav className="flex w-full justify-between rounded-xl border-b-2 p-4 text-xl font-semibold">
-      <div>Gallery</div>
-      <div>Sign in</div>
-    </nav>
-  );
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="g-4 flex flex-col">
-        <TopNav />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <body className="g-4 flex flex-col">
+          <TopNav />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

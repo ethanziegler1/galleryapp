@@ -18,12 +18,12 @@ export default async function HomePage() {
   const images = await db.query.images.findMany({
     orderBy: (model, { desc }) => desc(model.id),
   });
-  console.log(images);
+  console.log(images); 
 
   return (
     <main className="">
       <div className="flex flex-wrap">
-        {[images].map((image, index) => (
+        {[...mockImages].map((image, index) => (
           <div
             key={image.id + "-" + index}
             className="g-4 flex w-48 flex-col p-4"
